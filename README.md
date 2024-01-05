@@ -23,12 +23,12 @@ Tasks:
     - Are there any other automations you can think of that would be useful for this application?
     - Can you show what branching strategy and development workflow you would choose for this application? (assume there will be anywhere from 5-10 developers working in this repository)
 
-3. **AWS Deployment**: Deploy the application to AWS. You can choose to use any AWS service you want to deploy the application. You can use the Docker image you built in the previous task to deploy the application. NOTE: You will need to use your own AWS account for this task.  We will provide you with an additional $25 to cover any hosting fees for this challenge. If your hosting fees exceed $25, you are headed down the wrong path.
+3. **AWS Deployment**: Deploy the application to AWS. You can choose to use any AWS service you want to deploy the application but you should aim to land on a containerized solution (not just a static site because thats not what Spruce was looking for). NOTE: You will need to use your own AWS account for this task.  We will provide you with an additional $25 to cover any hosting fees for this challenge. If your hosting fees exceed $25, you are headed down the wrong path.
 Tasks:
     - Be ready to explain your deployment process and why you chose the AWS service(s) you did.
-    - While using an IAC tool is not required, the process for deploying the application should be well defined and repeatable.
+    - While using an IAC tool is not required, the process for deploying the application should be well defined and repeatable enough for Spruce to be able to repeat the process.
     - You should be able to provide access to the hosted application, which can be achieved without the need for a unique domain or Route 53 entries. It could simply be an IP address or the generated AWS URL.
-    - Once deployed, provide instructions for how updates to the application would be deployed for the developer.
+    - Once deployed, provide instructions for how updates to the application would be deployed by Spruce.
 
 4. **Observability**: Set up observability for the application. This could include application logs, metrics, and traces. You can choose to use any tool or service for this task (like New Relic, Datadog, etc.). Be prepared to show how you would use the observability tools to debug an issue with the application. Tasks:
     - Be ready to explain your observability setup and why you chose the tool(s) you did.
