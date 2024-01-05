@@ -1,6 +1,6 @@
 # DevOps Coding Challenge
 
-Welcome to our DevOps coding challenge! This challenge is designed to assess your skills in Docker, CI/CD, AWS, and Observability. You will be provided with 4 unique challenges and your goal is to choose 3 and try to complete as many of their tasks as you can or as is applicable. While you don't have to complete all of the tasks within a challenge, you should be able to speak to a process for how to resolve each challenge in the follow-up technical screening.  Ideally, you shouldn't spend more than 5 hours on this challenge.
+Welcome to our DevOps coding challenge! This challenge is designed to assess your skills in Docker, CI/CD, AWS, and Observability. You will be provided with 4 unique challenges and your goal is to choose 3 and try to complete as many of their tasks as you can or as is applicable. While you don't have to complete every challenge, you should be able to speak to a process for how to resolve each challenge in the follow-up technical screening.  Ideally, you shouldn't spend more than 5 hours on this challenge.
 
 ## The Story
 
@@ -27,7 +27,7 @@ Tasks:
 Tasks:
     - Be ready to explain your deployment process and why you chose the AWS service(s) you did.
     - While using an IAC tool is not required, the process for deploying the application should be well defined and repeatable.
-    - You should be able to provide access to the hosted application. But this doesn't mean you need a unique domain or route 53 entries and could even be just an IP address.
+    - You should be able to provide access to the hosted application, which can be achieved without the need for a unique domain or Route 53 entries. It could simply be an IP address or the generated AWS URL.
     - Once deployed, provide instructions for how updates to the application would be deployed for the developer.
 
 4. **Observability**: Set up observability for the application. This could include application logs, metrics, and traces. You can choose to use any tool or service for this task (like New Relic, Datadog, etc.). Be prepared to show how you would use the observability tools to debug an issue with the application. Tasks:
