@@ -4,7 +4,7 @@ Welcome to our DevOps coding challenge! This challenge is designed to assess you
 
 ## The Story
 
-You are approached by a software developer named Spruce Bingsteen who is working on a new web application to revolutionize the way we experience the beasts in the Bible. Spruce is looking for help with the DevOps side of the application. The developer has provided you with a repository that contains the source code for the application along with some commands to run the service locally. Spruce is stoked because he has made his first Dockerfile that can be used to build a Docker image for the application but he is complaining that is takes a long time everytime he makes a change. The developer has asked you to help with the following:
+You are approached by a software developer named Spruce Bingsteen who is working on a new web application to revolutionize the way we experience the beasts in the Bible. Spruce is looking for help with the DevOps side of the application. He has provided you with a repository that contains the source code along with some commands to run the service locally. Spruce is stoked because he has made his first Dockerfile but he is complaining that it takes long to build everytime he makes a change. He has asked you to help with the following:
 
 ## Challenges - Choose 3
 
@@ -33,6 +33,7 @@ Tasks:
 4. **Observability**: Set up observability for the application. This could include application logs, metrics, and traces. You can choose to use any tool or service for this task (like New Relic, Datadog, etc.). Be prepared to show how you would use the observability tools to debug an issue with the application. Tasks:
     - Be ready to explain your observability setup and why you chose the tool(s) you did.
     - The process for setting up observability should be well defined and repeatable.
+    - Can you use any IAC tools to configure your dashboards and settings?
     - The observability setup should be able to provide useful information for debugging issues with the application.
     - You can set up observability for the application locally or in AWS.
 
