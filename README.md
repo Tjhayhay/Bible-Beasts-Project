@@ -48,13 +48,13 @@ Good luck!
 First, run the server:
 
 ```bash
-npm run start
+npm run dev
 # or
-yarn start
+yarn dev
 # or
-pnpm start
+pnpm dev
 # or
-bun start
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
