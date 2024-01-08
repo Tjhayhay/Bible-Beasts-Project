@@ -39,7 +39,7 @@ Tasks:
 
 ## Submission
 
-Please fork this repository, make your changes, and send an email to tucker.hayden@bibleproject.com and david.carroll@bibleproject.com with the a link to your repo when you are finished (if it is a private repo please add the users "axesilo" and "tjhayhay". In your technical screening interview you will be expected to provide a brief explanation of your work.  Again, This is a new process for us and we want to hear your feedback/questions if you have them. So please feel free to reach out if you are feeling stuck. 
+Please fork this repository, make your changes, and send an email to tucker.hayden@bibleproject.com and david.carroll@bibleproject.com with the a link to your repo when you are finished (if it is a private repo please add the users [axesilo](https://github.com/axesilo) and [Tjhayhay](https://github.com/Tjhayhay). In your technical screening interview you will be expected to provide a brief explanation of your work.  Again, This is a new process for us and we want to hear your feedback/questions if you have them. So please feel free to reach out if you are feeling stuck. 
 
 Good luck!
 
