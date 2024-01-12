@@ -74,9 +74,11 @@ For the CI/CD I used github actions. I set up the following actions in your repo
 - **pre-commit.yml:** It helps ensure code quality by running checks (formatting, linting, tests) before allowing pull requests to pass.
     - **NOTE:** There is a branch with additional precommit hooks if you are interested in additional linting or formatting
 
-- **staging.yml:**
+- **staging.yml:** This workflow builds, pushes, and deploys to the staging environment.
 
-- **prod.yml:**
+- **prod.yml:** This workflow builds, pushes, and deploys to the staging environment.
+
+- **snyk security scan step:** There is a step in the build job of both environment yml files that runs a security scan on your docker image to check for known vulnerabilities
 
 
 In regards to a **branching strategy and developer workflow** I would recommend **trunk based development**. It is centered on a single main branch ('trunk'), encouraging developers to make small, frequent commits directly to this main branch. It allows for quick validation and integraiton of changes. This model aims to reduce overhead related to managing long-lived branches and encourages collaboration, as changes are immediately visible to the entire team. This workflow aligns with the approach of shorter development cycles and faster feedback.
@@ -99,4 +101,13 @@ I'm happy to go into more details when we hop on a call next week!
 The AWS resources were deployed using Terraform (IAC tool).
 
 
+
 4. **Observability**:
+I was hoping to spend additional time in this observability seciton as I know it's important to have insight into your application performance. I made some progress, but not complete. I can leave you with what I have to get started:
+
+- A merge request with the start to creating Terraform code to set up a dashboard that monitors the golden signals of observability:
+    **1. Latency:** The amount of time it takes your application to service a request.
+    **2. Traffic:** The amount of requests your system receives.
+    **3. Errors:** The rate of requests that fail.
+    **4. Saturation:** The stress on resources to meet the demands of your application.
+    Here is a helpful document for [getting started with terraform from New Relic](https://docs.newrelic.com/docs/more-integrations/terraform/terraform-intro/)
