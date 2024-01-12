@@ -89,11 +89,6 @@ jobs:
             run: |
               aws ecs describe-task-definition --task-definition bible_beasts_task_staging --query taskDefinition > task-definition.json
 
-
-          - name: echo image tag
-            run: |
-              echo ${{ needs.build.outputs.image_tag}}
-
           - name: Fill in the new image ID in the Amazon ECS task definition
             id: task-def
             uses: aws-actions/amazon-ecs-render-task-definition@v1
