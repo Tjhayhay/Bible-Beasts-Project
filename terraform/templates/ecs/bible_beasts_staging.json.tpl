@@ -11,7 +11,7 @@
     "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/bible_beasts_app_staging",
+          "awslogs-group": "/ecs/bible_beasts_staging",
           "awslogs-region": "${aws_region}",
           "awslogs-stream-prefix": "ecs"
         }
