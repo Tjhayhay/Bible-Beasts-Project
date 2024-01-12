@@ -62,7 +62,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Hey Spruce Bingsteen!
 
-Nice to make your aquantainenace. Sorry to hear about some of the trouble that you are experiencing. I would love to help you out! I've taken a look at your "Bible Beasts Project". Very cool! I checked out the issues you mentioned and added comments below for each of the sections as well as provided links to the staging and production apps. Hope they are helpful and I'll schedule a time for next week to provide a brief explanation of everything. cheers!
+Nice to make your acquaintance. Sorry to hear about some of the trouble that you are experiencing. I would love to help you out! I've taken a look at your "Bible Beasts Project". Very cool! I checked out the issues you mentioned and added comments below for each of the sections as well as provided links to the staging and production apps. Hope they are helpful and I'll schedule a time for next week to provide a brief explanation of everything. cheers!
 
 Here are the links to the hosted applications:
 
@@ -120,7 +120,7 @@ I set up AWS ECS, using Fargate, and supporting AWS resources via Terraform and 
 I also set up a Makefile in the /terraform folder which should help you run any terraform commands you need if you want to create your own infrastructure or update any of the infrastructure. Type the command "make" in the "/terraform" folder in your Bible Beasts App directory to get started. Happy Terraforming!
 
 4. **Observability**:
-I was hoping to spend additional time in this observability section to have insight into your application performance. I made found some good resources, but was not able to make much progress. I can leave you with what I have to get started though!
+I was hoping to spend additional time in this observability section to have insight into your application performance. However, I did not get to this section. I did find some good resources to get you started and pushed up a draft pull request!
 
 
 - A [draft pull request](https://github.com/highonchai/Bible-Beasts-Project/pull/16) with the start to creating Terraform code to set up a dashboard that monitors the golden signals of observability:
