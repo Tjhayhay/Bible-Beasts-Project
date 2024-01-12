@@ -23,7 +23,7 @@ jobs:
           contents: read
           packages: write
       outputs:
-        image-tag: ${{ steps.meta.outputs.tags}}
+        image_tag: ${{ steps.meta.outputs.tags}}
       steps:
           - name: Checkout Repository
             uses: actions/checkout@v4
@@ -89,15 +89,18 @@ jobs:
             run: |
               aws ecs describe-task-definition --task-definition bible_beasts_task_staging --query taskDefinition > task-definition.json
 
+
+          - name: echo image tag
+            run: |
+              echo ${{ needs.build.outputs.image_tag}}
+
           - name: Fill in the new image ID in the Amazon ECS task definition
             id: task-def
-            env:
-                IMAGE_TAG: ${{ needs.build.outputs.image-tag}}
             uses: aws-actions/amazon-ecs-render-task-definition@v1
             with:
               task-definition: task-definition.json
               container-name: ${{ env.CONTAINER_NAME }}
-              image: ${{ env.IMAGE_TAG}}
+              image: ${{ needs.build.outputs.image_tag}}
 
           - name: Deploy Amazon ECS task definition
             uses: aws-actions/amazon-ecs-deploy-task-definition@v1
