@@ -52,10 +52,9 @@ jobs:
                 labels: ${{ steps.meta.outputs.labels }}
 
             # Use Snyk action to scan Docker images for vulnerabilities. A secret, SNYK_TOKEN, has been added to the repository.
-            # Set continue-on-error to "true" to not break the pipeline
             - name: Snyk to check Docker images for vulnerabilities
               uses: snyk/actions/docker@master
-              continue-on-error: false
+              continue-on-error: false # set to "true" to not break the pipeline if needed
               env:
                 SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               with:
