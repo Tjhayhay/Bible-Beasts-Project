@@ -1,3 +1,5 @@
+include Makefile.helper
+
 .PHONY: staging-init
 staging-init: ## initialize terraform in staging environment
 	terraform workspace select staging

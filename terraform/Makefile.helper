@@ -1,0 +1,23 @@
+
+# Set colors for downstream Makefiles
+T_RED    := \e[0;31m
+T_GREEN  := \e[0;32m
+T_YELLOW := \e[0;33m
+T_RESET  := \e[0m
+
+.PHONY: help
+help: ## show usage
+	@IFS=$$'\n' ; \
+	help_lines=(`fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##/:/'`); \
+	printf "%-30s %s\n" "command" "help" ; \
+	printf "%-30s %s\n" "-------" "----" ; \
+	for help_line in $${help_lines[@]}; do \
+			IFS=$$':' ; \
+			help_split=($$help_line) ; \
+			help_command=`echo $${help_split[0]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
+			help_info=`echo $${help_split[2]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
+			printf '$(T_GREEN)'; \
+			printf "%-30s %s" $$help_command ; \
+			printf '$(T_RESET)'; \
+			printf "%s\n" $$help_info; \
+	done
