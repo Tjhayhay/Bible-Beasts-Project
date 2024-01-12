@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local .terraform directories
+**/.terraform/*
+terraform/terraform.tfstate.d/
+terraform_module/.terraform.lock.hcl
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
