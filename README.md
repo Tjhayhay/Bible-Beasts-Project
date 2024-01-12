@@ -68,6 +68,7 @@ Nice to make your aquantainenace. Sorry to hear about some of the trouble that y
 Great start here for the Docker file, Spruce! I made a few updates as outlined below:
 
 
+
 2. **CI/CD**:
 For the CI/CD I used github actions. I set up the following actions in your repository:
 
@@ -100,12 +101,15 @@ I'm happy to go into more details when we hop on a call next week!
 3. **AWS Deployment**:
 The AWS resources were deployed using Terraform (IAC tool).
 
+I set up the following AWS resources;
+
 
 
 4. **Observability**:
-I was hoping to spend additional time in this observability seciton as I know it's important to have insight into your application performance. I made some progress, but not complete. I can leave you with what I have to get started:
+I was hoping to spend additional time in this observability section to have insight into your application performance. I made some progress, but not did not complete it. I can leave you with what I have to get started:
 
-- A merge request with the start to creating Terraform code to set up a dashboard that monitors the golden signals of observability:
+
+- A [pull request](https://github.com/highonchai/Bible-Beasts-Project/pull/16) with the start to creating Terraform code to set up a dashboard that monitors the golden signals of observability:
     **1. Latency:** The amount of time it takes your application to service a request.
     **2. Traffic:** The amount of requests your system receives.
     **3. Errors:** The rate of requests that fail.
