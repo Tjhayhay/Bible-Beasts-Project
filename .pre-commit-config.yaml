@@ -8,3 +8,9 @@ repos:
       - id: check-yaml
         args:
           - --allow-multiple-documents
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.23
+    hooks:
+      - id: terraform-fmt
+        files: \.tf$
+        exclude: \.+.terraform\/.*$
