@@ -55,7 +55,7 @@ jobs:
             # Set continue-on-error to "true" to not break the pipeline
             - name: Snyk to check Docker images for vulnerabilities
               uses: snyk/actions/docker@master
-              continue-on-error: true # To make sure that SARIF upload gets called
+              continue-on-error: false
               env:
                 SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               with:
