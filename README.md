@@ -93,7 +93,7 @@ Currently, the github repository is set up with two environments, **staging** an
 
 NOTE: If the probject gets more complicated or automated testing cannot be put in place, you may want to look into creating an additional environment called "QA", which could be a longer lived testing environment before the push to the production environment.
 
-![Deployment layout](https://jhall.io/images/staging-trunk.png)
+![Deployment layout](development_workflow.png)
 
 I'm happy to go into more details when we hop on a call next week!
 
