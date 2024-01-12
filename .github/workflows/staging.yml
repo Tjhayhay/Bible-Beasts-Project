@@ -9,6 +9,10 @@ on:
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}-staging
+    AWS_REGION: us-east-1 # set this to your preferred AWS region
+    ECS_SERVICE: staging_bible_beasts_ecs_service # set this to your Amazon ECS service name
+    ECS_CLUSTER: staging_bible_beasts_ecs_cluster # set this to your Amazon ECS cluster name
+    CONTAINER_NAME: bible_beasts_staging # set this to the name of the container in the containerDefinitions section of your task definition
 
 jobs:
     build:
@@ -94,3 +98,11 @@ jobs:
               task-definition: task-definition.json
               container-name: ${{ env.CONTAINER_NAME }}
               image: ${{ env.IMAGE_TAG}}
+
+          - name: Deploy Amazon ECS task definition
+            uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+            with:
+              task-definition: ${{ steps.task-def.outputs.task-definition }}
+              service: ${{ env.ECS_SERVICE }}
+              cluster: ${{ env.ECS_CLUSTER }}
+              wait-for-service-stability: true
