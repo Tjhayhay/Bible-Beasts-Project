@@ -124,8 +124,8 @@ I was hoping to spend additional time in this observability section to have insi
 
 
 - A [draft pull request](https://github.com/highonchai/Bible-Beasts-Project/pull/16) with the start to creating Terraform code to set up a dashboard that monitors the golden signals of observability:
-    **1. Latency:** The amount of time it takes your application to service a request.
-    **2. Traffic:** The amount of requests your system receives.
-    **3. Errors:** The rate of requests that fail.
-    **4. Saturation:** The stress on resources to meet the demands of your application.
+1. **Latency:** The amount of time it takes your application to service a request.
+2. **Traffic:** The amount of requests your system receives.
+3. **Errors:** The rate of requests that fail.
+4. **Saturation:** The stress on resources to meet the demands of your application.
 Here is a helpful document for [getting started with terraform from New Relic](https://docs.newrelic.com/docs/more-integrations/terraform/terraform-intro/)
