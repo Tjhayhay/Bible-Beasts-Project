@@ -26,6 +26,12 @@ staging-apply: ## apply changes to staging environment
 	terraform workspace show
 	terraform apply -var-file="terraform_staging.tfvars"
 
+.PHONY: staging-output
+staging-output: ## show outputs from terraform
+	terraform workspace select staging
+	terraform workspace show
+	terraform output
+
 .PHONY: staging-destroy
 staging-destroy: ## destroy staging environment
 	terraform workspace select staging
@@ -57,6 +63,12 @@ prod-apply: ## apply changes to prod environment
 	terraform workspace select prod
 	terraform workspace show
 	terraform apply -var-file="terraform_prod.tfvars"
+
+.PHONY: prod-output
+prod-output: ## show outputs from terraform
+	terraform workspace select prod
+	terraform workspace show
+	terraform output
 
 .PHONY: prod-destroy
 prod-destroy: ## destroy prod environment
