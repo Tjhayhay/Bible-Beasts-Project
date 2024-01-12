@@ -58,3 +58,45 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+## Hey Spruce Bingsteen!
+
+Nice to make your aquantainenace. Sorry to hear about some of the trouble that you are experiencing. I would love to help you out! I've added comments below for each of the sections. Hope they are helpful and I'll schedule a time for next week to provide a brief explanation of everything. cheers!
+
+1. **Docker Notes**:
+Great start here for the Docker file, Spruce! I made a few updates as outlined below:
+
+
+2. **CI/CD**:
+For the CI/CD I used github actions. I set up the following actions in your repository:
+
+- **pre-commit.yml:** It helps ensure code quality by running checks (formatting, linting, tests) before allowing pull requests to pass.
+    - **NOTE:** There is a branch with additional precommit hooks if you are interested in additional linting or formatting
+
+- **staging.yml:**
+
+- **prod.yml:**
+
+
+In regards to a **branching strategy and developer workflow** I would recommend **trunk based development**. It is centered on a single main branch ('trunk'), encouraging developers to make small, frequent commits directly to this main branch. It allows for quick validation and integraiton of changes. This model aims to reduce overhead related to managing long-lived branches and encourages collaboration, as changes are immediately visible to the entire team. This workflow aligns with the approach of shorter development cycles and faster feedback.
+
+Feature flags are often used to hide work in progress if needed, so if this app grows to need that you may want to look into some feature flag solutions.
+
+Currently, the github repository is set up with two environments, **staging** and **prod**. In a trunk based development workflow we use the environments as outlined below:
+
+- **Staging Environment:** This environment is not a mandatory step as part of a "promotion workflow", however it is a part of your development workflow as a type of "sandbox" that can be used as you develop your Bible Beasts Project further. Here is a helpful blog post explaining some of the workflow. Also, see the diagram below.
+
+- **Production Environment:** This environment is the production environment of your application. Whenever you finish with your pull request changes and have validated them in the staging environment, the pull request can be merged and will be automatically pushed to the production environment. Ideally with this set up you would want to automate as much testing as possible so that when the pull request is merged it can automatically test and automatically merge into the production environment.
+
+NOTE: If the probject gets more complicated or automated testing cannot be put in place, you may want to look into creating an additional environment called "QA", which could be a longer lived testing environment before the push to the production environment.
+
+![Deployment layout](https://jhall.io/images/staging-trunk.png)
+
+I'm happy to go into more details when we hop on a call next week!
+
+3. **AWS Deployment**:
+The AWS resources were deployed using Terraform (IAC tool).
+
+
+4. **Observability**:
