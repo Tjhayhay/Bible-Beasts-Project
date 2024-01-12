@@ -3,7 +3,6 @@ name: Build, Push, and Deploy for prod
 on:
     push:
       branches: [$default-branch]
-    pull_request:
     workflow_dispatch:
 
 env:
