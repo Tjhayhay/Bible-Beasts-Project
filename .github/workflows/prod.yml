@@ -85,7 +85,7 @@ jobs:
 
           - name: Download ECS task definition for deployment
             run: |
-              aws ecs describe-task-definition --task-definition bible_beasts_task_prod --query taskDefinition > task-definition.jsong
+              aws ecs describe-task-definition --task-definition bible_beasts_task_prod --query taskDefinition > task-definition.json
 
           - name: Fill in the new image ID in the Amazon ECS task definition
             id: task-def
