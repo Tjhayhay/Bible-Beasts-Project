@@ -74,7 +74,7 @@ Here are the links to the hosted applications:
 Great start here for the Dockerfile, Spruce! I made a few updates as outlined below to improve build time and size of the docker image:
 
     1. Set up a **multi-stage build approach** which helps reduce the size of the final image by using a smaller base image at runtime
-    2. Specified a specific and **recent version of Node.js** for the application. Node verison 18 no longer has Active Support.
+    2. Specified a specific and **recent version of Node.js** for the application. Node version 18 no longer has Active Support.
     3. **Leveraged docker build cache** by installing depencencies in a separate, earlier layer of the Dockerfile. This reduces unnecessary dependancy installations.
     4. Removed the build-time.txt command as the timestamp information is available in the metadata
 
@@ -105,17 +105,17 @@ NOTE: If the probject gets more intricate or automated testing is not feasible, 
 ![Deployment layout](development_workflow.png)
 
 **Updates to your Application:**
-    When updating your application:
-    1. Make changes to your application using a pull request
-    2. Github actions will push those changes to the staging environment. Test your changes in the staging environment.
-    3. Merge the pull request to deploy to production
+When updating your application:
+1. Make changes to your application using a pull request
+2. Github actions will push those changes to the staging environment. Test your changes in the staging environment.
+3. Merge the pull request to deploy to production
 
 I'm happy to go into more details and provide more thorough instructions when we hop on a call next week!
 
 3. **AWS Deployment**:
 The AWS resources were deployed using Terraform (IAC tool).
 
-I set up AWS ECS, using Fargate, and used Terraform workspaces to set up different AWS infracture for the staging and production environments. Happy to go over those in more detail on our call!
+I set up AWS ECS, using Fargate, and supporting AWS resources via Terraform and used Terraform workspaces to set up different AWS infracture for the staging and production environments. Happy to go over those in more detail on our call!
 
 I also set up a Makefile in the /terraform folder which should help you run any terraform commands you need if you want to create your own infrastructure or update any of the infrastructure. Type the command "make" in the "/terraform" folder in your Bible Beasts App directory to get started. Happy Terraforming!
 
