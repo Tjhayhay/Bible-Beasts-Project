@@ -1,0 +1,106 @@
+name: Build, Push, and Deploy for prod
+
+on:
+    push:
+      branches: [$default-branch]
+    pull_request:
+    workflow_dispatch:
+
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ${{ github.repository }}-prod
+    AWS_REGION: us-east-1 # set this to your preferred AWS region
+    ECS_SERVICE: prod_bible_beasts_ecs_service # set this to your Amazon ECS service name
+    ECS_CLUSTER: prod_bible_beasts_ecs_cluster # set this to your Amazon ECS cluster name
+    CONTAINER_NAME: bible_beasts_prod # set this to the name of the container in the containerDefinitions section of your task definition
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      environment: prod
+      # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+      permissions:
+          contents: read
+          packages: write
+      outputs:
+        image_tag: ${{ steps.meta.outputs.tags}}
+      steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v4
+
+          # Uses the `docker/login-action` action to log in to the Container registry registry using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
+          - name: Log in to the Container registry
+            uses: docker/login-action@v3
+            with:
+              registry: ${{ env.REGISTRY }}
+              username: ${{ github.actor }}
+              password: ${{ secrets.GITHUB_TOKEN }}
+
+          # This step uses [docker/metadata-action](https://github.com/docker/metadata-action#about) to extract tags and labels that will be applied to the specified image. The `id` "meta" allows the output of this step to be referenced in a subsequent step. The `images` value provides the base name for the tags and labels.
+          - name: Extract metadata (tags, labels) for Docker
+            id: meta
+            uses: docker/metadata-action@v5
+            with:
+              images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+              tags: |
+                  type=sha
+
+          # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
+          # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see "[Usage](https://github.com/docker/build-push-action#usage)" in the README of the `docker/build-push-action` repository.
+          # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
+          - name: Build and push Docker image
+            id: build-image
+            uses: docker/build-push-action@v5
+            with:
+              context: .
+              push: true
+              tags: ${{ steps.meta.outputs.tags}}
+              labels: ${{ steps.meta.outputs.labels }}
+
+          # Use Snyk action to scan Docker images for vulnerabilities. A secret, SNYK_TOKEN, has been added to the repository.
+          - name: Snyk to check Docker images for vulnerabilities
+            uses: snyk/actions/docker@master
+            continue-on-error: false # set to "true" to not break the pipeline if needed
+            env:
+              SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+            with:
+              image: ${{ steps.meta.outputs.tags}}
+              args: --severity-threshold=high
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment: prod
+        permissions:
+            contents: read
+            packages: write
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v4
+
+          - name: Configure AWS credentials
+            uses: aws-actions/configure-aws-credentials@v4
+            with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: ${{ env.AWS_REGION }}
+
+          - name: Download ECS task definition for deployment
+            run: |
+              aws ecs describe-task-definition --task-definition bible_beasts_task_prod --query taskDefinition > task-definition.jsong
+
+          - name: Fill in the new image ID in the Amazon ECS task definition
+            id: task-def
+            uses: aws-actions/amazon-ecs-render-task-definition@v1
+            with:
+              task-definition: task-definition.json
+              container-name: ${{ env.CONTAINER_NAME }}
+              image: ${{ needs.build.outputs.image_tag}}
+
+          - name: Deploy Amazon ECS task definition
+            uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+            with:
+              task-definition: ${{ steps.task-def.outputs.task-definition }}
+              service: ${{ env.ECS_SERVICE }}
+              cluster: ${{ env.ECS_CLUSTER }}
+              wait-for-service-stability: true
