@@ -13,7 +13,7 @@ env:
 
 jobs:
     build:
-        runs-on: ubunute-latest
+        runs-on: ubuntu-latest
         environment: staging
         permissions:
             contents: read
