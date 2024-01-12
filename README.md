@@ -62,12 +62,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Hey Spruce Bingsteen!
 
-Nice to make your aquantainenace. Sorry to hear about some of the trouble that you are experiencing. I would love to help you out! I've added comments below for each of the sections. Hope they are helpful and I'll schedule a time for next week to provide a brief explanation of everything. cheers!
+Nice to make your aquantainenace. Sorry to hear about some of the trouble that you are experiencing. I would love to help you out! I've taken a look at your "Bible Beasts Project". Very cool! I checked out the issues you mentioned and added comments below for each of the sections as well as provided links to the staging and production apps. Hope they are helpful and I'll schedule a time for next week to provide a brief explanation of everything. cheers!
+
+Here are the links to the hosted applications:
+
+[Staging Application](http://staging-bb-load-balancer-847918050.us-east-1.elb.amazonaws.com:3000/)
+
+[Production Application](http://prod-bb-load-balancer-1491557060.us-east-1.elb.amazonaws.com:3000/)
 
 1. **Docker Notes**:
-Great start here for the Docker file, Spruce! I made a few updates as outlined below:
+Great start here for the Dockerfile, Spruce! I made a few updates as outlined below to improve build time and size of the docker image:
 
-
+    1. Set up a **multi-stage build approach** which helps reduce the size of the final image by using a smaller base image at runtime
+    2. Specified a specific and **recent version of Node.js** for the application. Node verison 18 no longer has Active Support.
+    3. **Leveraged docker build cache** by installing depencencies in a separate, earlier layer of the Dockerfile. This reduces unnecessary dependancy installations.
+    4. Removed the build-time.txt command as the timestamp information is available in the metadata
 
 2. **CI/CD**:
 For the CI/CD I used github actions. I set up the following actions in your repository:
@@ -81,37 +90,42 @@ For the CI/CD I used github actions. I set up the following actions in your repo
 
 - **snyk security scan step:** There is a step in the build job of both environment yml files that runs a security scan on your docker image to check for known vulnerabilities
 
+In regards to a **branching strategy and developer workflow** I recommend adopting a **trunk based development** strategy. This method revolves around a single primary branch (known as the 'trunk'), where developers are encouraged to make small, frequent commits directly to this main branch. It facilitates rapid validation and integration of changes. This model is designed to minimize the complexity involved in managing long-lived branches and promotes collaboration, ensuring that changes are immediately visible to the entire team. This workflow aligns seamlessly with shorter development cycles and a need for expedited feedback.
 
-In regards to a **branching strategy and developer workflow** I would recommend **trunk based development**. It is centered on a single main branch ('trunk'), encouraging developers to make small, frequent commits directly to this main branch. It allows for quick validation and integraiton of changes. This model aims to reduce overhead related to managing long-lived branches and encourages collaboration, as changes are immediately visible to the entire team. This workflow aligns with the approach of shorter development cycles and faster feedback.
+If necessary, feature flags are often employed to conceal ongoing work, offering flexibility as the application evolves.
 
-Feature flags are often used to hide work in progress if needed, so if this app grows to need that you may want to look into some feature flag solutions.
+Presently, the GitHub repository is configured with two environments, namely **staging** and **prod**. In a trunk-based development workflow, we utilize these environments in the following manner:
 
-Currently, the github repository is set up with two environments, **staging** and **prod**. In a trunk based development workflow we use the environments as outlined below:
+- **Staging Environment:** In trunk-based development, the staging environment isn't a mandatory part of the "promotion workflow," yet it serves as a component within your development lifecycle. It functions as a "sandbox" during the development of your Bible Beasts Project. Here is a [helpful blog post](https://jhall.io/archive/2022/07/01/can-we-use-a-staging-environment-with-trunk-based-development/) that delves into aspects of this workflow. Also, please refer to the diagram below.
 
-- **Staging Environment:** This environment is not a mandatory step as part of a "promotion workflow", however it is a part of your development workflow as a type of "sandbox" that can be used as you develop your Bible Beasts Project further. Here is a helpful blog post explaining some of the workflow. Also, see the diagram below.
+- **Production Environment:** This environment represents the production environment. Once you've completed your pull request changes and have verified them in the staging environment, the pull request can be merged and automatically deployed to the production environment. Ideally, with this setup, you should aim to automate as much testing as possible.
 
-- **Production Environment:** This environment is the production environment of your application. Whenever you finish with your pull request changes and have validated them in the staging environment, the pull request can be merged and will be automatically pushed to the production environment. Ideally with this set up you would want to automate as much testing as possible so that when the pull request is merged it can automatically test and automatically merge into the production environment.
-
-NOTE: If the probject gets more complicated or automated testing cannot be put in place, you may want to look into creating an additional environment called "QA", which could be a longer lived testing environment before the push to the production environment.
+NOTE: If the probject gets more intricate or automated testing is not feasible, you may want to look into creating an additional environment called "QA", which could be a longer lived testing environment before the push to the production environment.
 
 ![Deployment layout](development_workflow.png)
 
-I'm happy to go into more details when we hop on a call next week!
+**Updates to your Application:**
+    When updating your application:
+    1. Make changes to your application using a pull request
+    2. Github actions will push those changes to the staging environment. Test your changes in the staging environment.
+    3. Merge the pull request to deploy to production
+
+I'm happy to go into more details and provide more thorough instructions when we hop on a call next week!
 
 3. **AWS Deployment**:
 The AWS resources were deployed using Terraform (IAC tool).
 
-I set up the following AWS resources;
+I set up AWS ECS, using Fargate, and used Terraform workspaces to set up different AWS infracture for the staging and production environments. Happy to go over those in more detail on our call!
 
-
+I also set up a Makefile in the /terraform folder which should help you run any terraform commands you need if you want to create your own infrastructure or update any of the infrastructure. Type the command "make" in the "/terraform" folder in your Bible Beasts App directory to get started. Happy Terraforming!
 
 4. **Observability**:
-I was hoping to spend additional time in this observability section to have insight into your application performance. I made some progress, but not did not complete it. I can leave you with what I have to get started:
+I was hoping to spend additional time in this observability section to have insight into your application performance. I made found some good resources, but was not able to make much progress. I can leave you with what I have to get started though!
 
 
-- A [pull request](https://github.com/highonchai/Bible-Beasts-Project/pull/16) with the start to creating Terraform code to set up a dashboard that monitors the golden signals of observability:
+- A [draft pull request](https://github.com/highonchai/Bible-Beasts-Project/pull/16) with the start to creating Terraform code to set up a dashboard that monitors the golden signals of observability:
     **1. Latency:** The amount of time it takes your application to service a request.
     **2. Traffic:** The amount of requests your system receives.
     **3. Errors:** The rate of requests that fail.
     **4. Saturation:** The stress on resources to meet the demands of your application.
-    Here is a helpful document for [getting started with terraform from New Relic](https://docs.newrelic.com/docs/more-integrations/terraform/terraform-intro/)
+Here is a helpful document for [getting started with terraform from New Relic](https://docs.newrelic.com/docs/more-integrations/terraform/terraform-intro/)
