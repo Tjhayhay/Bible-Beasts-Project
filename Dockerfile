@@ -1,23 +1,32 @@
-# Start from the node alpine image for smaller base image size
-FROM node:alpine
+# Use a specific Node.js version and Alpine for the build stage for a smaller base image
+FROM node:20-alpine as builder
 
-# Set the working directory to /app
+# Set the working directory
 WORKDIR /app
 
-# Copy the package.json to working directory to install first
-COPY package.json .
+# Copy package.json and package-lock.json to the working directory to install first
+COPY package.json package-lock.json ./
 
 # Install project dependencies
-RUN npm install
+RUN npm ci
 
 # Copy the project files to the working directory
 COPY . .
 
-# Build the Next.js app
+# Build the Bible Beasts App app
 RUN npm run build
 
-# Expose port 3000 for the Next.js app to be accessible
+# Use a smaller Alpine base image for the final runtime
+FROM node:20-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy built app from the previous build stage for a slimmer image
+COPY --from=builder /app /app
+
+# Expose port 3000 for the Bible Beast Project app to be accessible
 EXPOSE 3000
 
-# Start the Next.js app
+# Start the Bible Beasts Projects app
 CMD ["npm", "start"]
