@@ -1,15 +1,16 @@
-# Start from the official Node.js LTS base image
+# Start from the node alpine image for smaller base image size
 FROM node:alpine
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the project files to the working directory
+# Copy the package.json to working directory to install first
 COPY package.json .
 
 # Install project dependencies
 RUN npm ci
 
+# Copy the project files to the working directory
 COPY . .
 
 # Build the Next.js app
