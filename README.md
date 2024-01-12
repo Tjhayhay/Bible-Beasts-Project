@@ -64,11 +64,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Nice to make your acquaintance. Sorry to hear about some of the trouble that you are experiencing. I would love to help you out! I've taken a look at your "Bible Beasts Project". Very cool! I checked out the issues you mentioned and added comments below for each of the sections as well as provided links to the staging and production apps. Hope they are helpful and I'll schedule a time for next week to provide a brief explanation of everything. cheers!
 
-Here are the links to the hosted applications:
-
-[Staging Application](http://staging-bb-load-balancer-847918050.us-east-1.elb.amazonaws.com:3000/)
-
-[Production Application](http://prod-bb-load-balancer-1491557060.us-east-1.elb.amazonaws.com:3000/)
+Also, I have emailed you the links to the hosted application!
 
 1. **Docker Notes**:
 Great start here for the Dockerfile, Spruce! I made a few updates as outlined below to improve build time and size of the docker image:
